@@ -1,17 +1,14 @@
-
-import { LinearGradient } from 'expo-linear-gradient';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { useState , useEffect } from 'react';
 import Item from './Item'
 
-const List = ({ todosFilt , todos , onHandleCompletedChange }) => {
-
+const List = ({ todosFilt , todos , onHandleCompletedChange , deleteItem }) => {
+    console.log('todos',todos)
+    console.log('filt', todosFilt)
 
     return (
-        todosFilt &&
         <FlatList
             data={todosFilt}
-            renderItem={({ item }) => <Item style={styles.item} title={item.title} completed={item.completed} handleChange={onHandleCompletedChange} item={item}/>}
+            renderItem={({ item }) => <Item title={item.title} completed={item.completed} handleChange={onHandleCompletedChange} item={item} deleteItem={deleteItem}/>}
             keyExtractor={item => item.id}
             style={styles.lista}
         />
@@ -25,8 +22,6 @@ const styles = StyleSheet.create({
     lista: {
         width: 300,
         margin: 5,
+        maxHeight:700
     },
-    item: {
-        marginVertical: 50,
-    }
 });

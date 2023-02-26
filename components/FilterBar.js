@@ -12,14 +12,14 @@ const FilterBar = ({ onHandleFilter }) => {
             <Pressable className='py-2 px-3 mb-2 bg-gradientb rounded-full items-center justify-center mt-3'
                 onPress={() => onHandleFilter('pending')}
             >
-                <Text className='text-md text-slate-200 pb-1' style={{ fontFamily: 'Raleway-Black' }}>Pendientes</Text>
+                <Text className='text-md text-slate-200 pb-1' style={{ fontFamily: 'Raleway-Black' }}>Completadas</Text>
             </Pressable>
             <Pressable className='py-2 px-3 mb-2 bg-gradientb rounded-full items-center justify-center mt-3'
                 onPress={() => {
                     onHandleFilter('completed')
                 }}
             >
-                <Text className='text-md text-slate-200 pb-1' style={{ fontFamily: 'Raleway-Black' }}>Completadas</Text>
+                <Text className='text-md text-slate-200 pb-1' style={{ fontFamily: 'Raleway-Black' }}>Pendientes</Text>
             </Pressable>
         </View>
     )

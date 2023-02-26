@@ -5,7 +5,7 @@ import AddItem from './components/AddItem';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useEffect } from 'react';
 import FilterBar from './components/FilterBar';
-import { getData, getFilteredData , data } from './asyncmock';
+import { data } from './asyncmock';
 
 export default function App() {
 
@@ -14,19 +14,26 @@ export default function App() {
   const [value, setValue] = useState('');
   const [filter, setFilter] = useState('all');
   const [todosFilt, setTodosFilt] = useState([]);
-  const [visibility, setVisibility] = useState([]);
+  const [completedChange, setCompletedChange] = useState(true)
 
   const onHandleCompletedChange = (item) => {
     const element = todos.find(element => element.id === item.id)
     element.completed = !element.completed
+    if(element.completed===true){
+      element.status = 'completed'
+    }else{
+      element.status = 'pending'
+    }
+    setCompletedChange(!completedChange)
   }
 
   const onHandleAddItem = () => {
-    itemTitle &&
-    setTodosFilt(todos => [...todos, { id: Date.now().toString(), title: itemTitle, completed: false , status:'pending' }])
+    itemTitle != '' &&
+    setTodos(todos => [...todos, { id: Date.now().toString(), title: itemTitle, completed: false , status:'pending' }])
+    setCompletedChange(!completedChange)
+    setFilter('showall')
     setItemTitle('')
     setValue('')
-    console.log('agrego a todosfile',todosFilt)
   }
 
   const onHandleInput = (text) => {
@@ -36,26 +43,23 @@ export default function App() {
 
   const onHandleFilter = (status) => {
     setFilter(status)
-    console.log('status',status)
-
   }
 
+  const deleteItem = (item) =>{
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',item.id)
+    setTodos(todos => todos.filter(e => e.id != item.id))
+    setCompletedChange(!completedChange)
+  }
 
     useEffect(() => {
-      console.log('filter',filter)
-      if (filter === 'all') {
+      if (filter === 'all' || filter === 'showall') {
           setTodosFilt(todos)
-          console.log('todas',todosFilt)
       } else if (filter === 'pending') {
         setTodosFilt(todos.filter(e => e.status === 'completed'))
-        console.log('useffce compel',todosFilt)
       } else if (filter === 'completed') {
         setTodosFilt(todos.filter(e => e.status === 'pending'))
-        console.log('useffce pendin',todosFilt)
       }
-
-    }, [filter])
-
+    }, [filter, completedChange])
 
   const [fontsLoaded] = useFonts({
     'Raleway-Black': require('./assets/fonts/Raleway-Black.ttf'),
@@ -71,28 +75,17 @@ export default function App() {
     <Text>cargando.....</Text>
   }
 
-
-
-
-
   return (
     <View className='flex-1 items-center justify-center w-full h-full bg-slate-800'>
-      <LinearGradient
-        colors={['#037298', '#004B65']}
-        style={styles.background}
-      >
+      <LinearGradient colors={['#037298', '#004B65']} style={styles.background}>
         <FilterBar onHandleFilter={onHandleFilter}/>
-        <List todos={todos} onHandleCompletedChange={onHandleCompletedChange} todosFilt={todosFilt} visibility={visibility} />
+        <List todos={todos} onHandleCompletedChange={onHandleCompletedChange} todosFilt={todosFilt} deleteItem={deleteItem}/>
         <AddItem onHandleAddItem={onHandleAddItem} onHandleInput={onHandleInput} value={value} />
       </LinearGradient>
 
     </View>
   );
 }
-
-
-
-
 
 const styles = StyleSheet.create({
   background: {
@@ -101,6 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     height: 'auto',
+    maxHeight:'90%',
     borderRadius: 25,
   },
 });

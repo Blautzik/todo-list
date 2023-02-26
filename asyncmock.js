@@ -26,16 +26,9 @@ export const data = [
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(data)
-        }, 500)
+        }, 50)
     })
   }
 
-  export const getFilteredData = (status) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(data.filter(e => e.status === status))
-        }, 500)
-    })
-  }
   
 
