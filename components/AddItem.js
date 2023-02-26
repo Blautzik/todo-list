@@ -1,5 +1,5 @@
-import { View, Text, TextInput, Button, Pressable } from 'react-native'
-import React, { useState , useEffect } from 'react'
+import { View, Text, TextInput,  Pressable } from 'react-native'
+import React from 'react'
 
 const AddItem = ({ onHandleAddItem, onHandleInput, value }) => {
 

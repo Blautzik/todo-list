@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity, Pressable, Modal, Button } from 'react-native'
+import { View, Text, TouchableOpacity, Pressable, Modal } from 'react-native'
 import { useState } from 'react';
 import Checkbox from 'expo-checkbox';
 
 
 
-const Item = ({ title, id, completed, handleChange, item, deleteItem }) => {
+const Item = ({ title, completed, handleChange, item, deleteItem }) => {
 
     const [isChecked, setChecked] = useState(completed);
     const [modalOpen, setModalOpen] = useState(false);

@@ -46,7 +46,6 @@ export default function App() {
   }
 
   const deleteItem = (item) =>{
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',item.id)
     setTodos(todos => todos.filter(e => e.id != item.id))
     setCompletedChange(!completedChange)
   }
