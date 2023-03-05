@@ -28,6 +28,7 @@ const OnboardingSlider = ({ navigation }) => {
     const login = (navigation, user, pass) => {
         if ((user.toLowerCase()) === 'admin' && pass === '123') {
             navigation.navigate('HomeScreen')
+            setOpenLoginModal(false)
         } else {
             setIncorrect('true')
         }
