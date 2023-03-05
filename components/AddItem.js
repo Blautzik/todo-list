@@ -14,7 +14,7 @@ const AddItem = ({ onHandleAddItem, onHandleInput, value }) => {
                 placeholder='Nueva Tarea'
                 placeholderTextColor='#D9D9D9'
 
-            ></TextInput>
+            />
             <Pressable className='py-2 px-3 mb-2 bg-gradientc rounded-full items-center justify-center mt-3'
                 onPress={() => {
                     onHandleAddItem()
