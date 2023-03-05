@@ -17,14 +17,14 @@ import { Colors } from '../utils/colors';
 
 
 
-const OnboardingSlider = ( {navigation} ) => {
+const OnboardingSlider = ({ navigation }) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const { width: windowWidth } = useWindowDimensions();
     const [OpenLoginModal, setOpenLoginModal] = useState(false)
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
     const [incorrect, setIncorrect] = useState(false)
-    
+
     const login = (navigation, user, pass) => {
         if ((user.toLowerCase()) === 'admin' && pass === '123') {
             navigation.navigate('HomeScreen')
@@ -193,8 +193,18 @@ const OnboardingSlider = ( {navigation} ) => {
                                 >
                                     <Text className='text-md text-slate-200 pb-1' style={{ fontFamily: 'Raleway-Black' }}>Entrar</Text>
                                 </Pressable>
-                                {incorrect&&
-                                    <Text>datos incorrectos, comuniquese con Fedello para recibir las credenciales de acceso</Text>
+                                {incorrect &&
+                                    <Modal>
+                                        <View className='items-center justify-center h-screen'>
+
+                                        <Text>datos incorrectos, user: admin, pass: 123</Text>
+                                        <Pressable  onPress={() => setIncorrect(false)}
+                                            className='py-2 px-3 mb-2 bg-gradientb rounded-lg items-center justify-center mt-3 w-100 h-10'
+                                        >
+                                            <Text className='text-md text-slate-200 pb-1' style={{ fontFamily: 'Raleway-Black' }}>volver</Text>
+                                            </Pressable>
+                                        </View>
+                                    </Modal>
                                 }
                             </View>
                         </View>
